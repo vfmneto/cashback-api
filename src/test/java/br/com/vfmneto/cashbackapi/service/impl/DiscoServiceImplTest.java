@@ -12,8 +12,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
+import java.util.Optional;
+
 import static br.com.vfmneto.cashbackapi.domain.Genero.ROCK;
 import static java.util.Arrays.asList;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -36,8 +39,21 @@ public class DiscoServiceImplTest {
         Page<Disco> resultadoEsperado = new PageImpl<>(asList());
         when(discoRepository.findByGeneroOrderByNomeAlbumAsc(ROCK, pagina.toPageable())).thenReturn(resultadoEsperado);
 
-        Page<Disco> discos = discoService.consultarDiscosPorGeneroOrdenadoDeFormaCrescentePeloNome(ROCK, pagina);
+        Page<Disco> discos = discoService.consultarPorGeneroOrdenandoDeFormaCrescentePeloNome(ROCK, pagina);
         assertThat(discos, CoreMatchers.sameInstance(resultadoEsperado));
+    }
+
+    @Test
+    public void deveriaConsultarDiscoPeloIdentificador() {
+
+        Disco discoEsperado = new Disco();
+
+        when(discoRepository.findById(1l)).thenReturn(Optional.of(discoEsperado));
+
+        Optional<Disco> discoOptional = discoService.consultarPeloIdentificador(1l);
+
+        assertThat(discoOptional.get(), is(discoEsperado));
+
     }
 
 }

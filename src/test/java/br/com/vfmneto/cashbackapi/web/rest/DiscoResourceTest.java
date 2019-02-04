@@ -12,15 +12,19 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
 
 import static br.com.vfmneto.cashbackapi.domain.Genero.ROCK;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
+import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DiscoResourceTest {
@@ -42,15 +46,40 @@ public class DiscoResourceTest {
 
         Disco disco = new Disco();
         Page<Disco> resultado = new PageImpl<>(asList(disco));
-        when(discoService.consultarDiscosPorGeneroOrdenadoDeFormaCrescentePeloNome(ROCK, pagina)).thenReturn(resultado);
+        when(discoService.consultarPorGeneroOrdenandoDeFormaCrescentePeloNome(ROCK, pagina)).thenReturn(resultado);
 
         DiscoDTO discoDTO = new DiscoDTO();
         when(mapper.toDto(disco)).thenReturn(discoDTO);
 
-        ResponseEntity<Page<DiscoDTO>> responseEntity = discoResource.consultarDiscosPorGeneroOrdenadoDeFormaCrescentePeloNome(ROCK, pagina);
+        ResponseEntity<Page<DiscoDTO>> responseEntity = discoResource.consultarPorGeneroOrdenandoDeFormaCrescentePeloNome(ROCK, pagina);
 
         assertThat(responseEntity.getBody().get().collect(toList()).contains(discoDTO), equalTo(true));
-        assertThat(responseEntity.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(responseEntity.getStatusCode(), equalTo(OK));
+    }
+
+    @Test
+    public void deveriaRetornarDiscoComIdentificadorExistente() {
+
+        Disco discoEsperado = new Disco();
+        when(discoService.consultarPeloIdentificador(1l)).thenReturn(Optional.of(discoEsperado));
+
+        DiscoDTO discoDTOEsperado = new DiscoDTO();
+        when(mapper.toDto(discoEsperado)).thenReturn(discoDTOEsperado);
+
+        ResponseEntity<DiscoDTO> responseEntity = discoResource.consultarPeloIdentificador(1l);
+
+        assertThat(responseEntity.getStatusCode(), equalTo(OK));
+        assertThat(responseEntity.getBody(), is(discoDTOEsperado));
+    }
+
+    @Test
+    public void deveriaRetornarNotFoundQuandoIdentificadorNaoExistir() {
+
+        when(discoService.consultarPeloIdentificador(100l)).thenReturn(Optional.empty());
+
+        ResponseEntity<DiscoDTO> responseEntity = discoResource.consultarPeloIdentificador(100l);
+
+        assertThat(responseEntity.getStatusCode(), equalTo(NOT_FOUND));
     }
 
 }

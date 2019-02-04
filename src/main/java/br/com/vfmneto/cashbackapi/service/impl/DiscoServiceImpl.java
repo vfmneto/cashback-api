@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class DiscoServiceImpl implements DiscoService {
 
@@ -22,8 +24,14 @@ public class DiscoServiceImpl implements DiscoService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Disco> consultarDiscosPorGeneroOrdenadoDeFormaCrescentePeloNome(Genero genero, PaginaDTO pagina) {
+    public Page<Disco> consultarPorGeneroOrdenandoDeFormaCrescentePeloNome(Genero genero, PaginaDTO pagina) {
         return discoRepository.findByGeneroOrderByNomeAlbumAsc(genero, pagina.toPageable());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Disco> consultarPeloIdentificador(Long id) {
+        return discoRepository.findById(id);
     }
 
 }

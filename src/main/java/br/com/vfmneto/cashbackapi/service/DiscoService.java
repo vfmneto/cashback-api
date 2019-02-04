@@ -5,8 +5,11 @@ import br.com.vfmneto.cashbackapi.domain.Genero;
 import br.com.vfmneto.cashbackapi.dto.PaginaDTO;
 import org.springframework.data.domain.Page;
 
+import java.util.Optional;
+
 public interface DiscoService {
 
-    Page<Disco> consultarDiscosPorGeneroOrdenadoDeFormaCrescentePeloNome(Genero genero, PaginaDTO pagina);
+    Page<Disco> consultarPorGeneroOrdenandoDeFormaCrescentePeloNome(Genero genero, PaginaDTO pagina);
 
+    Optional<Disco> consultarPeloIdentificador(Long id);
 }
