@@ -24,6 +24,6 @@ public abstract class StepDefs {
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
-    protected ResultActions actions;
+    protected ResultActions resultActions;
 
 }

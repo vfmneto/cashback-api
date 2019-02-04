@@ -1,6 +1,7 @@
 package br.com.vfmneto.cashbackapi.cucumber.stepdefs;
 
 import br.com.vfmneto.cashbackapi.domain.Genero;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.hamcrest.CoreMatchers;
@@ -29,4 +30,5 @@ public class InicializarCatalogoDeDiscosComDadosSpotifyStepDefs extends StepDefs
             assertThat(quantidade, IsEqual.equalTo(generos.get(genero)));
         });
     }
+
 }
