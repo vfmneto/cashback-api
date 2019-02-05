@@ -37,12 +37,18 @@ public class ConsultarCatalogoDiscosStepDefs extends StepDefs {
 
     @When("^consultar disco pelo identificador (\\d+)$")
     public void consultarDiscoPeloIdentificador(String identificador) throws Throwable {
-        resultActions = mockMvc.perform(get("/api/discos/{id}", identificador)).andExpect(status().isOk());
+        resultActions = mockMvc.perform(get("/api/discos/{id}", identificador));
     }
 
     @Then("^deveria retornar o disco com nome \"([^\"]*)\" e gênero \"([^\"]*)\"$")
     public void deveriaRetornarODiscoComNomeEGênero(String nome, String genero) throws Throwable {
-        resultActions.andExpect(jsonPath("$.nomeAlbum").value(nome));
-        resultActions.andExpect(jsonPath("$.genero").value(genero));
+        resultActions.andExpect(status().isOk())
+                     .andExpect(jsonPath("$.nomeAlbum").value(nome))
+                     .andExpect(jsonPath("$.genero").value(genero));
+    }
+
+    @Then("^deveria retornar disco não encontrado$")
+    public void deveriaRetornarDiscoNãoEncontrada() throws Throwable {
+        resultActions.andExpect(status().isNotFound());
     }
 }
