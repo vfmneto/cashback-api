@@ -51,7 +51,7 @@ public class DiscoResourceTest {
         DiscoDTO discoDTO = new DiscoDTO();
         when(mapper.toDto(disco)).thenReturn(discoDTO);
 
-        ResponseEntity<Page<DiscoDTO>> responseEntity = discoResource.consultarPorGeneroOrdenandoDeFormaCrescentePeloNome(ROCK, pagina);
+        ResponseEntity<Page<DiscoDTO>> responseEntity = discoResource.consultarPorGeneroOrdenandoDeFormaCrescentePeloNome(ROCK.name(), pagina);
 
         assertThat(responseEntity.getBody().get().collect(toList()).contains(discoDTO), equalTo(true));
         assertThat(responseEntity.getStatusCode(), equalTo(OK));
@@ -80,6 +80,14 @@ public class DiscoResourceTest {
         ResponseEntity<DiscoDTO> responseEntity = discoResource.consultarPeloIdentificador(100l);
 
         assertThat(responseEntity.getStatusCode(), equalTo(NOT_FOUND));
+    }
+
+    @Test
+    public void deveriaRetornarUmaListaVaziaQuandoConsultarPorGeneroOrdenandoDeFormaCrescentePeloNomeReliable() {
+
+        ResponseEntity<Page<DiscoDTO>> resultado = discoResource.consultarPorGeneroOrdenandoDeFormaCrescentePeloNomeReliable("GENERO", new PaginaDTO(1, 2));
+
+        assertThat(resultado.getBody().isEmpty(), equalTo(true));
     }
 
 }

@@ -7,3 +7,9 @@ Feature: Consultar catálogo de disco filtrando pelo gênero e ordenando de form
         | MPB    | 20 Grandes Sucessos De Quarteto Em Cy & Mpb-4 |
         | MPB    | 40 anos de música (ao vivo)                   |
         | MPB    | Acústico Mpb                                  |
+
+    # Simulando um cenário para ser tolerante a falha
+  Scenario: Consultar pelo gênero que não existe, o sistema deveria se comportar para ser tolerante a falha
+    When consultar catálogo de discos pelo gênero "NAO_EXISTE", pagina 0 e quantidade por página 3 ordenado pelo nome de forma crescente
+    Then deveria retornar os discos abaixo:
+        | genero | nomeAlbum |

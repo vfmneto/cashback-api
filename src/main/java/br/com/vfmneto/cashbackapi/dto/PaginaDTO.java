@@ -51,4 +51,12 @@ public class PaginaDTO implements Serializable {
     public int hashCode() {
         return Objects.hash(numeroPagina, quantidadePorPagina);
     }
+
+    @Override
+    public String toString() {
+        return "PaginaDTO{" +
+                "numeroPagina=" + numeroPagina +
+                ", quantidadePorPagina=" + quantidadePorPagina +
+                '}';
+    }
 }
