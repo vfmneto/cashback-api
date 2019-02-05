@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public class Venda implements Serializable {
     private Long id;
 
     @Column(name = "data")
-    private LocalDate data;
+    private Date data;
 
     @Column(name = "nome_cliente")
     private String nomeCliente;
@@ -38,11 +39,11 @@ public class Venda implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

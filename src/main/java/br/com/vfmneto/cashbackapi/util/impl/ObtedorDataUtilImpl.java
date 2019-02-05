@@ -4,12 +4,13 @@ import br.com.vfmneto.cashbackapi.util.ObtedorDataUtil;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Component
 public class ObtedorDataUtilImpl implements ObtedorDataUtil {
 
     @Override
-    public LocalDate obterDataAtual() {
-        return LocalDate.now();
+    public Date obterDataAtual() {
+        return new Date();
     }
 }

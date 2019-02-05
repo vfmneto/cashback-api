@@ -15,6 +15,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -35,10 +37,10 @@ public class CalculadorValorCashbackComponentImplTest {
     }
 
     @Test
-    public void deveriaCalcularCashbachPorGenero_e_diaDaSemana() {
+    public void deveriaCalcularCashbachPorGenero_e_diaDaSemana() throws ParseException {
 
-        LocalDate dataNoDomingo = LocalDate.of(2019, Month.FEBRUARY, 10);
-        when(obtedorDataUtil.obterDataAtual()).thenReturn(dataNoDomingo);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        when(obtedorDataUtil.obterDataAtual()).thenReturn(simpleDateFormat.parse("10/02/2019"));
 
         PorcetagemCashback porcetagemCashback = new PorcetagemCashback();
         porcetagemCashback.setPorcetagem(BigDecimal.TEN);

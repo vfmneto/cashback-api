@@ -40,7 +40,7 @@ public class RegistrarVendaStepDefs extends StepDefs {
 
     @Given("^que a data atual seja \"([^\"]*)\"$")
     public void queADataAtualSeja(@Format("dd/MM/yyyy") Date dataAtual) throws Throwable {
-        obtedorDataUtil.setDataAtual(dataAtual.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        obtedorDataUtil.setDataAtual(dataAtual);
     }
 
     @When("^registrar a venda com nome cliente \"([^\"]*)\" e com os discos selecionados:$")

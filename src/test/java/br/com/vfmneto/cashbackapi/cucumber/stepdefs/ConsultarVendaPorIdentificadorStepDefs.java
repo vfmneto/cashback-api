@@ -3,6 +3,7 @@ package br.com.vfmneto.cashbackapi.cucumber.stepdefs;
 import br.com.vfmneto.cashbackapi.domain.Disco;
 import br.com.vfmneto.cashbackapi.domain.Venda;
 import br.com.vfmneto.cashbackapi.repository.VendaRepository;
+import cucumber.api.Format;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -27,7 +28,7 @@ public class ConsultarVendaPorIdentificadorStepDefs extends StepDefs {
     private JdbcTemplate jdbcTemplate;
 
     @Given("^que as vendas abaixo estejam cadastradas:$")
-    public void queAsVendasAbaixoEstejamCadastradas(List<Venda> vendas) throws Throwable {
+    public void queAsVendasAbaixoEstejamCadastradas(@Format("dd/MM/yyyy") List<Venda> vendas) throws Throwable {
         vendaRepository.saveAll(vendas);
     }
 

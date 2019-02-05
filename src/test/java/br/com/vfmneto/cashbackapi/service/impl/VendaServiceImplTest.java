@@ -19,6 +19,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,7 +74,7 @@ public class VendaServiceImplTest {
         itens.add(criarItemVenda(ID_DISCO_DOIS));
         vendaInformada.setItensVenda(itens);
 
-        LocalDate dataAtualEsperada = LocalDate.now();
+        Date dataAtualEsperada = new Date();
         when(obtedorDataUtil.obterDataAtual()).thenReturn(dataAtualEsperada);
 
         Optional<Disco> discoUm = criarExpectativaPorDisco(ID_DISCO_UM, CASHBACK_DISCO_UM);
