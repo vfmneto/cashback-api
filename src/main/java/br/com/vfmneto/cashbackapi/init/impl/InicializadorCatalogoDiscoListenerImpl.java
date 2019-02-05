@@ -22,10 +22,10 @@ public class InicializadorCatalogoDiscoListenerImpl implements InicializadorCata
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        LOGGER.info("iniciando carregamento spotify");
+        LOGGER.info("iniciando carregamento do catálogo de discos com API do Spotify");
 
         inicializadorCatalogoDiscoService.inicializar();
 
-        LOGGER.info("fim carregamento spotify");
+        LOGGER.info("fim carregamento do catálogo de discos com API do Spotify");
     }
 }

@@ -10,10 +10,24 @@ https://github.com/vfmneto/cashback-api
 
 https://circleci.com/gh/vfmneto
 
-### Para rodar a aplicação
+### Para rodar os testes
+```
+export CLIENT_ID=CHANGE_IN_PRODUCTION
+export CLIENT_SECRET=CHANGE_IN_PRODUCTION
+mvn install -Dapplication.spotify.clientId=${CLIENT_ID} -Dapplication.spotify.clientSecret=${CLIENT_SECRET}
+```
 
-```maven
+### Para rodar a aplicação
+```
 export CLIENT_ID=CHANGE_IN_PRODUCTION
 export CLIENT_SECRET=CHANGE_IN_PRODUCTION
 mvn -Dspring-boot.run.arguments=--application.spotify.clientId=${CLIENT_ID},--application.spotify.clientSecret=${CLIENT_SECRET}
 ```
+
+### Para acessar os serviços
+
+http://localhost:8080
+
+http://localhost:8080/swagger-ui.html#/
+
+http://localhost:8080/h2-console/
