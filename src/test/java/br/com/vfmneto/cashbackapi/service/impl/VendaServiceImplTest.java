@@ -3,11 +3,12 @@ package br.com.vfmneto.cashbackapi.service.impl;
 import br.com.vfmneto.cashbackapi.domain.Disco;
 import br.com.vfmneto.cashbackapi.domain.ItemVenda;
 import br.com.vfmneto.cashbackapi.domain.Venda;
+import br.com.vfmneto.cashbackapi.dto.PaginaDTO;
 import br.com.vfmneto.cashbackapi.repository.DiscoRepository;
-import br.com.vfmneto.cashbackapi.repository.PorcetagemCashbackRepository;
 import br.com.vfmneto.cashbackapi.repository.VendaRepository;
 import br.com.vfmneto.cashbackapi.service.CalculadorValorCashbackComponent;
 import br.com.vfmneto.cashbackapi.util.ObtedorDataUtil;
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,17 +16,19 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -41,7 +44,6 @@ public class VendaServiceImplTest {
 
     @Mock private VendaRepository vendaRepository;
     @Mock private ObtedorDataUtil obtedorDataUtil;
-    @Mock private PorcetagemCashbackRepository porcetagemCashbackRepository;
     @Mock private DiscoRepository discoRepository;
     @Mock private CalculadorValorCashbackComponent calculadorValorCashbackComponent;
 
@@ -94,6 +96,20 @@ public class VendaServiceImplTest {
         verificarItemVenda(vendaInformada, discoDois.get(), CASHBACK_DISCO_DOIS, vendaCapturada);
 
         assertThat(resultado, is(vendaRegistrada));
+    }
+
+    @Test
+    public void deveriaConsultarEntreDuasDatasOrdenandoDeFormaDecrescentePelaDataVenda() {
+
+        PaginaDTO pagina = new PaginaDTO(1, 10);
+        Date dataInicial = new Date();
+        Date dataFinal = new Date();
+
+        Page<Venda> resultadoEsperado = new PageImpl<>(asList());
+        when(vendaRepository.findByDataGreaterThanEqualAndDataLessThanEqualOrderByDataDesc(dataInicial, dataFinal, pagina.toPageable())).thenReturn(resultadoEsperado);
+
+        Page<Venda> vendas = vendaService.consultarEntreDuasDatasOrdenandoDeFormaDecrescentePelaDataVenda(dataInicial, dataFinal, pagina);
+        assertThat(vendas, CoreMatchers.sameInstance(resultadoEsperado));
     }
 
     private void verificarItemVenda(Venda vendaEsperada, Disco discoEsperado, BigDecimal cashbackDiscoEsperado, Venda vendaCapturada) {

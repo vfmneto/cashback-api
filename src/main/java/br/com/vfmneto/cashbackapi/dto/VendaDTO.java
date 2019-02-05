@@ -3,6 +3,7 @@ package br.com.vfmneto.cashbackapi.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class VendaDTO implements Serializable {
     private Date data;
     private String nomeCliente;
     private BigDecimal cashbackTotal;
-    private List<ItemVendaDTO> itensVenda;
+    private List<ItemVendaDTO> itensVenda = new ArrayList<>();
 
     public Long getId() {
         return id;

@@ -1,19 +1,20 @@
 package br.com.vfmneto.cashbackapi.service.impl;
 
-import br.com.vfmneto.cashbackapi.domain.DiaSemana;
 import br.com.vfmneto.cashbackapi.domain.Disco;
-import br.com.vfmneto.cashbackapi.domain.PorcetagemCashback;
 import br.com.vfmneto.cashbackapi.domain.Venda;
+import br.com.vfmneto.cashbackapi.dto.PaginaDTO;
 import br.com.vfmneto.cashbackapi.repository.DiscoRepository;
-import br.com.vfmneto.cashbackapi.repository.PorcetagemCashbackRepository;
 import br.com.vfmneto.cashbackapi.repository.VendaRepository;
 import br.com.vfmneto.cashbackapi.service.CalculadorValorCashbackComponent;
 import br.com.vfmneto.cashbackapi.service.VendaService;
 import br.com.vfmneto.cashbackapi.util.ObtedorDataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -33,6 +34,7 @@ public class VendaServiceImpl implements VendaService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Venda> consultarPeloIdentificador(Long id) {
         return vendaRepository.findById(id);
     }
@@ -53,6 +55,12 @@ public class VendaServiceImpl implements VendaService {
         });
 
         return vendaRepository.save(venda);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Venda> consultarEntreDuasDatasOrdenandoDeFormaDecrescentePelaDataVenda(Date dataInicial, Date dataFinal, PaginaDTO pagina) {
+        return vendaRepository.findByDataGreaterThanEqualAndDataLessThanEqualOrderByDataDesc(dataInicial, dataFinal, pagina.toPageable());
     }
 
 }
