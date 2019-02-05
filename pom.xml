@@ -25,6 +25,7 @@
 		<cucumber.version>1.2.5</cucumber.version>
 		<commons-math3.version>3.6.1</commons-math3.version>
 		<mapstruct.version>1.2.0.Final</mapstruct.version>
+		<jib-maven-plugin.version>0.9.11</jib-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -250,6 +251,34 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>${jib-maven-plugin.version}</version>
+				<configuration>
+					<from>
+						<image>openjdk:8-jre-alpine</image>
+					</from>
+					<to>
+						<image>cashback-api:latest</image>
+					</to>
+					<container>
+						<entrypoint>
+							<shell>sh</shell>
+							<option>-c</option>
+							<arg>chmod +x /entrypoint.sh &amp;&amp; sync &amp;&amp; /entrypoint.sh</arg>
+						</entrypoint>
+						<ports>
+							<port>8080</port>
+						</ports>
+						<environment>
+							<APPLICATION_SPOTIFY_CLIENT_ID>CHANGE_IN_PRODUCTION</APPLICATION_SPOTIFY_CLIENT_ID>
+							<APPLICATION_SPOTIFY_CLIENT_SECRET>CHANGE_IN_PRODUCTION</APPLICATION_SPOTIFY_CLIENT_SECRET>
+						</environment>
+						<useCurrentTimestamp>true</useCurrentTimestamp>
+					</container>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
