@@ -87,6 +87,7 @@ public class RegistrarVendaStepDefs extends StepDefs {
 
     @Given("^a tabela de porcetagem de cashback abaixo:$")
     public void aTabelaDePorcetagemDeCashbackAbaixo(List<PorcetagemCashback> porcetagemCashbacks) throws Throwable {
+        porcetagemCashbackRepository.deleteAll();
         porcetagemCashbackRepository.saveAll(porcetagemCashbacks);
     }
 }
