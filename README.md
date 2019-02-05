@@ -13,7 +13,7 @@ https://circleci.com/gh/vfmneto
 ### Para rodar a aplicação
 
 ```maven
-export CLIENT_ID=90ff7c96027c4aa4953ac55d46517f4f
-export CLIENT_SECRET=664cbb31787449ca960af5d528de552a
+export CLIENT_ID=CHANGE_IN_PRODUCTION
+export CLIENT_SECRET=CHANGE_IN_PRODUCTION
 mvn -Dspring-boot.run.arguments=--application.spotify.clientId=${CLIENT_ID},--application.spotify.clientSecret=${CLIENT_SECRET}
 ```
