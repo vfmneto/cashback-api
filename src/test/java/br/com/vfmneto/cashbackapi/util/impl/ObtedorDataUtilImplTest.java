@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import static java.time.LocalDate.now;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -21,7 +22,7 @@ public class ObtedorDataUtilImplTest {
 
     @Test
     public void deveriaRetornarDataAtual() {
-        assertThat(obtedorDataUtil.obterDataAtual(), equalTo(now()));
+        assertThat(obtedorDataUtil.obterDataAtual(), equalTo(new Date()));
     }
 
 }
