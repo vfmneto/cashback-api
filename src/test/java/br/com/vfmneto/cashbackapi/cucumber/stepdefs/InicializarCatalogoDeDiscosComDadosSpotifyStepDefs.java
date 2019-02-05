@@ -24,7 +24,7 @@ public class InicializarCatalogoDeDiscosComDadosSpotifyStepDefs extends StepDefs
     }
 
     @Then("^deveria conter as quantidades discos cadastrados por gênero:$")
-    public void deveriaConterAsQuantidadesDiscosCadastradosPorGenero(Map<Genero, Integer> generos) throws Throwable {
+    public void deveriaConterAsQuantidadesDiscosCadastradosPorGenero(Map<Genero, Integer> generos) {
         generos.keySet().forEach(genero -> {
             Integer quantidade = jdbcTemplate.queryForObject("select count(d.id) from disco d where d.genero = ?", Integer.class, genero.name());
             assertThat(quantidade, IsEqual.equalTo(generos.get(genero)));

@@ -15,17 +15,17 @@ Feature: Registrar venda
       |  MPB   | MPB1       |  10   |
       |  POP   | POP1       |  20   |
       |  ROCK  | ROCK1      |  30   |
-    Then deveria registrar venda com valor total de retorno 20
+    Then deveria registrar venda com nome cliente "Maria Eduarda", data "03/02/2019" e com valor total de cashback 20
     And o valor de retorno de cada disco deveria:
       | MPB1      |    3     |
       | POP1      |    5     |
       | ROCK1     |   12     |
 
   Scenario: Registrar venda com um disco no dia da semana SEGUNDA
-    Given que a data atual seja "18/02/2019"
-    When registrar a venda com nome cliente "Maria Eduarda" e com os discos selecionados:
+    Given que a data atual seja "18/03/2019"
+    When registrar a venda com nome cliente "João da Silva" e com os discos selecionados:
       | genero     | nomeAlbum  | preco |
-      | CLASSICAL  | CLASSICAL1 |  100  |
-    Then deveria registrar venda com valor total de retorno 20
+      | CLASSICAL  | CLASSICAL1 |  200  |
+    Then deveria registrar venda com nome cliente "João da Silva", data "18/03/2019" e com valor total de cashback 40
     And o valor de retorno de cada disco deveria:
-      | CLASSICAL1 | 20 |
+      | CLASSICAL1 | 40 |
