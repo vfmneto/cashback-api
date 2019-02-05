@@ -1,7 +1,7 @@
 application:
     spotify:
-        clientId: 90ff7c96027c4aa4953ac55d46517f4f
-        clientSecret: 664cbb31787449ca960af5d528de552a
+        clientId: CHANGE_IN_PRODUCTION
+        clientSecret: CHANGE_IN_PRODUCTION
 
 spring:
     application:
