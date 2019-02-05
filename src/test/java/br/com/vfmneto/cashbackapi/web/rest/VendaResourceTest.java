@@ -17,6 +17,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -56,5 +57,24 @@ public class VendaResourceTest {
         ResponseEntity<VendaDTO> responseEntity = vendaResource.consultarPeloIdentificador(20l);
 
         assertThat(responseEntity.getStatusCode(), equalTo(NOT_FOUND));
+    }
+
+    @Test
+    public void deveriaRegistrarVenda() {
+
+        Venda vendaInformada = new Venda();
+        VendaDTO vendaDTOInformada = new VendaDTO();
+        when(mapper.toEntity(vendaDTOInformada)).thenReturn(vendaInformada);
+
+        Venda vendaRegistrada = new Venda();
+        when(vendaService.registrarVenda(vendaInformada)).thenReturn(vendaRegistrada);
+
+        VendaDTO vendaDTORegistrada = new VendaDTO();
+        when(mapper.toDto(vendaRegistrada)).thenReturn(vendaDTORegistrada);
+
+        ResponseEntity<VendaDTO> vendaDTOResponseEntity = vendaResource.registrarVenda(vendaDTOInformada);
+
+        assertThat(vendaDTOResponseEntity.getStatusCode(), equalTo(CREATED));
+        assertThat(vendaDTOResponseEntity.getBody(), is(vendaDTORegistrada));
     }
 }

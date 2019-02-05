@@ -1,15 +1,19 @@
 package br.com.vfmneto.cashbackapi.dto;
 
-import javax.persistence.Column;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
-public class VendaDTO {
+public class VendaDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private LocalDate data;
     private String nomeCliente;
     private BigDecimal cashbackTotal;
+    private List<ItemVendaDTO> itensVenda;
 
     public Long getId() {
         return id;
@@ -41,5 +45,13 @@ public class VendaDTO {
 
     public void setCashbackTotal(BigDecimal cashbackTotal) {
         this.cashbackTotal = cashbackTotal;
+    }
+
+    public List<ItemVendaDTO> getItensVenda() {
+        return itensVenda;
+    }
+
+    public void setItensVenda(List<ItemVendaDTO> itensVenda) {
+        this.itensVenda = itensVenda;
     }
 }

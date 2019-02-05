@@ -3,9 +3,12 @@ package br.com.vfmneto.cashbackapi.dto;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class PaginaDTO {
+public class PaginaDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer numeroPagina;
     private Integer quantidadePorPagina;

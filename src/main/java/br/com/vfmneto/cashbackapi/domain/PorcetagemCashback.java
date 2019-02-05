@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "disco")
-public class Disco implements Serializable {
+@Table(name = "porcetagem_cashback")
+public class PorcetagemCashback implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -16,15 +16,16 @@ public class Disco implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "nome_album")
-    private String nomeAlbum;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "genero")
     private Genero genero;
 
-    @Column(name = "preco", precision = 10, scale = 2)
-    private BigDecimal preco;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "dia_semana")
+    private DiaSemana diaSemana;
+
+    @Column(name = "porcetagem", precision = 10, scale = 2)
+    private BigDecimal porcetagem;
 
     public Long getId() {
         return id;
@@ -32,14 +33,6 @@ public class Disco implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNomeAlbum() {
-        return nomeAlbum;
-    }
-
-    public void setNomeAlbum(String nomeAlbum) {
-        this.nomeAlbum = nomeAlbum;
     }
 
     public Genero getGenero() {
@@ -50,19 +43,27 @@ public class Disco implements Serializable {
         this.genero = genero;
     }
 
-    public BigDecimal getPreco() {
-        return preco;
+    public DiaSemana getDiaSemana() {
+        return diaSemana;
     }
 
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
+    public void setDiaSemana(DiaSemana diaSemana) {
+        this.diaSemana = diaSemana;
+    }
+
+    public BigDecimal getPorcetagem() {
+        return porcetagem;
+    }
+
+    public void setPorcetagem(BigDecimal porcetagem) {
+        this.porcetagem = porcetagem;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Disco disco = (Disco) o;
+        PorcetagemCashback disco = (PorcetagemCashback) o;
         return Objects.equals(id, disco.id);
     }
 

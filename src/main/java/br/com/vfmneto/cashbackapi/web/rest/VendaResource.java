@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 @RestController
@@ -37,6 +36,12 @@ public class VendaResource {
 
         return vendaOptional.map(venda -> new ResponseEntity<>(mapper.toDto(venda), HttpStatus.OK))
                             .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping("/vendas")
+    public ResponseEntity<VendaDTO> registrarVenda(@RequestBody VendaDTO vendaDTO) {
+        Venda result = vendaService.registrarVenda(mapper.toEntity(vendaDTO));
+        return new ResponseEntity<>(mapper.toDto(result), HttpStatus.CREATED);
     }
 
 }

@@ -1,6 +1,10 @@
 package br.com.vfmneto.cashbackapi.cucumber.stepdefs;
 
 import br.com.vfmneto.cashbackapi.CashbackApiApplication;
+import br.com.vfmneto.cashbackapi.repository.DiscoRepository;
+import br.com.vfmneto.cashbackapi.repository.PorcetagemCashbackRepository;
+import br.com.vfmneto.cashbackapi.util.ObtedorDataUtilStub;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,11 +22,12 @@ import javax.persistence.EntityManager;
 @ContextConfiguration(classes = CashbackApiApplication.class)
 public abstract class StepDefs {
 
-    @Autowired
-    protected MockMvc mockMvc;
-
-    @Autowired
-    protected JdbcTemplate jdbcTemplate;
+    @Autowired protected MockMvc mockMvc;
+    @Autowired protected JdbcTemplate jdbcTemplate;
+    @Autowired protected DiscoRepository discoRepository;
+    @Autowired protected ObtedorDataUtilStub obtedorDataUtil;
+    @Autowired protected PorcetagemCashbackRepository porcetagemCashbackRepository;
+    @Autowired protected ObjectMapper objectMapper;
 
     protected ResultActions resultActions;
 

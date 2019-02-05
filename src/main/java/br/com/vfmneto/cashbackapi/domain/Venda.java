@@ -1,13 +1,15 @@
 package br.com.vfmneto.cashbackapi.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "venda")
-public class Venda {
+public class Venda implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,6 +26,9 @@ public class Venda {
 
     @Column(name = "cashback_total", precision = 10, scale = 2)
     private BigDecimal cashbackTotal;
+
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<ItemVenda> itensVenda;
 
     public Long getId() {
         return id;
@@ -55,6 +60,14 @@ public class Venda {
 
     public void setCashbackTotal(BigDecimal cashbackTotal) {
         this.cashbackTotal = cashbackTotal;
+    }
+
+    public List<ItemVenda> getItensVenda() {
+        return itensVenda;
+    }
+
+    public void setItensVenda(List<ItemVenda> itensVenda) {
+        this.itensVenda = itensVenda;
     }
 
     @Override

@@ -4,7 +4,7 @@ import br.com.vfmneto.cashbackapi.domain.Venda;
 import br.com.vfmneto.cashbackapi.dto.VendaDTO;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses = { ItemVendaMapper.class })
 public interface VendaMapper extends EntityMapper<VendaDTO, Venda> {
 
     @Override

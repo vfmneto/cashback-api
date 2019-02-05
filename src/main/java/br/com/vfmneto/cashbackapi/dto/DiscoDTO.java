@@ -2,9 +2,12 @@ package br.com.vfmneto.cashbackapi.dto;
 
 import br.com.vfmneto.cashbackapi.domain.Genero;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class DiscoDTO {
+public class DiscoDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String nomeAlbum;
