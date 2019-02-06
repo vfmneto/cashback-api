@@ -12,16 +12,16 @@ https://circleci.com/gh/vfmneto
 
 ### Para rodar os testes
 ```
-export CLIENT_ID=CHANGE_IN_PRODUCTION
-export CLIENT_SECRET=CHANGE_IN_PRODUCTION
-mvn install -Dapplication.spotify.clientId=${CLIENT_ID} -Dapplication.spotify.clientSecret=${CLIENT_SECRET}
+export APPLICATION_SPOTIFY_CLIENTID=CHANGE_IN_PRODUCTION
+export APPLICATION_SPOTIFY_CLIENTSECRET=CHANGE_IN_PRODUCTION
+mvn install
 ```
 
 ### Para rodar a aplicação
 ```
-export CLIENT_ID=CHANGE_IN_PRODUCTION
-export CLIENT_SECRET=CHANGE_IN_PRODUCTION
-mvn -Dspring-boot.run.arguments=--application.spotify.clientId=${CLIENT_ID},--application.spotify.clientSecret=${CLIENT_SECRET}
+export APPLICATION_SPOTIFY_CLIENTID=CHANGE_IN_PRODUCTION
+export APPLICATION_SPOTIFY_CLIENTSECRET=CHANGE_IN_PRODUCTION
+mvn
 ```
 
 ### Para construir imagem Docker
