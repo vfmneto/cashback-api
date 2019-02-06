@@ -21,7 +21,7 @@ public class ConsultarVendaPorIdentificadorStepDefs extends StepDefs {
     private VendaRepository vendaRepository;
 
     @Given("^que as vendas abaixo estejam cadastradas:$")
-    public void queAsVendasAbaixoEstejamCadastradas(@Format("dd/MM/yyyy") List<Venda> vendas) {
+    public void queAsVendasAbaixoEstejamCadastradas(@Format("dd/MM/yyyy HH:mm:ss") List<Venda> vendas) {
         vendaRepository.saveAll(vendas);
     }
 

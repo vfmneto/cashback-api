@@ -35,7 +35,7 @@ public class ConsultarVendaPeloRangeDatasStepDefs extends StepDefs {
     }
 
     @Then("^deveria retornar as vendas abaixo:$")
-    public void deveriaRetornarAsVendasAbaixo(@Format("dd/MM/yyyy") List<VendaDTO> vendasEsperada) throws Throwable {
+    public void deveriaRetornarAsVendasAbaixo(@Format("dd/MM/yyyy HH:mm:ss") List<VendaDTO> vendasEsperada) throws Throwable {
 
         List<VendaDTO> resultado = getResultado();
 

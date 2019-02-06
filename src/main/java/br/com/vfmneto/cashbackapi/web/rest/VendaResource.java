@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
@@ -45,9 +46,9 @@ public class VendaResource {
 
     @GetMapping("/vendas")
     public ResponseEntity<Page<VendaDTO>> consultarEntreDuasDatasOrdenandoDeFormaDecrescentePelaDataVenda(
-                                                                @DateTimeFormat(pattern="dd/MM/yyyy") Date dataInicial,
-                                                                @DateTimeFormat(pattern="dd/MM/yyyy") Date dataFinal,
-                                                                PaginaDTO pagina) {
+                                    @RequestParam("dataInicial") @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss") Date dataInicial,
+                                    @RequestParam("dataFinal") @DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss") Date dataFinal,
+                                    PaginaDTO pagina) {
         Page<Venda> page = vendaService.consultarEntreDuasDatasOrdenandoDeFormaDecrescentePelaDataVenda(dataInicial, dataFinal, pagina);
         return new ResponseEntity<>(page.map(mapper::toDto), HttpStatus.OK);
     }

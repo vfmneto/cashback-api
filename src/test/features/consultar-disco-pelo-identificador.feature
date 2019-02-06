@@ -2,7 +2,7 @@ Feature: Consultar disco pelo identificador
 
   Scenario: Consultar disco existente
     When consultar disco pelo identificador 58
-    Then deveria retornar o disco com nome "40 anos de música (ao vivo)" e gênero "MPB"
+    Then deveria retornar o disco com nome "20 Grandes Sucessos De Quarteto Em Cy & Mpb-4" e gênero "MPB"
 
   Scenario: Consultar disco não existente
     When consultar disco pelo identificador 999999
